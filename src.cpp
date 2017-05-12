@@ -10,29 +10,40 @@ using namespace cv;
 using namespace std;
 
 int main(int argc, char** argv) {
-	
+
 	Mat image = imread("C:/Users/westbro/Desktop/Lenna.png");
 
-	/// Set the dstimage the same type and size as src
-	Mat result_img = Mat::zeros(image.rows, image.cols, image.type());
+	double h_rate = 2.0;
+	double w_rate = 2.0;
 
-	Point2f srcTri[3];
-	Point2f dstTri[3];
-	Mat warp_mat(2, 3, CV_32FC1);
-	
-	/// Set your 3 points to calculate the Affine Transform
-	srcTri[0] = Point2f(0, 0);
-	srcTri[1] = Point2f(src.cols - 1, 0);
-	srcTri[2] = Point2f(0, src.rows - 1);
-	dstTri[0] = Point2f(src.cols*0.0, src.rows*0.33);
-	dstTri[1] = Point2f(src.cols*0.85, src.rows*0.25);
-	dstTri[2] = Point2f(src.cols*0.15, src.rows*0.7);
+	int h = image.rows*h_rate;
+	int w = image.cols*w_rate;
 
-	/// Get the Affine Transform
-	warp_mat = getAffineTransform(srcTri, dstTri);
+	Mat result_img(h, w, CV_8UC3, Scalar(0));
 
-	/// Apply the Affine Transform just found to the srcimage
-	warpAffine(src, warp_dst, warp_mat, warp_dst.size());
+	for (int y = 0; y < result_img.rows - 1; y++) {
+		for (int x = 0; x < result_img.cols - 1; x++) {
+			int px = (int)(x / w_rate);
+			int py = (int)(y / h_rate);
+
+			double fx1 = (double)x / (double)w_rate - (double)px;
+			double fx2 = 1 - fx1;
+			double fy1 = (double)y / (double)h_rate - (double)py;
+			double fy2 = 1 - fy1;
+
+			double w1 = fx2*fy2;
+			double w2 = fx1*fy2;
+			double w3 = fx2*fy1;
+			double w4 = fx1*fy1;
+			if (px < image.cols - 1 && py < image.rows - 1) {
+				Vec3b p1 = image.at<Vec3b>(py, px);
+				Vec3b p2 = image.at<Vec3b>(py, px + 1);
+				Vec3b p3 = image.at<Vec3b>(py + 1, px);
+				Vec3b p4 = image.at<Vec3b>(py + 1, px + 1);
+				result_img.at<Vec3b>(y, x) = w1*p1 + w2*p2 + w3*p3 + w4*p4;
+			}
+		}
+	}
 
 	/// Create Windows
 	namedWindow("Original Image", WINDOW_AUTOSIZE);
