@@ -8,7 +8,7 @@
 *Interpolation* is the technique of supplying these empty spaces.
 
 ### What is **Bilinear-Interpolation**?
-- A *Bilinear interpolation* is a method that infers the value by applying two lines of the x-axis and the y-axis. There are four dots which are two lines are meeting. The values of these four adjacent points are obtained by the weights of each of corresponding areas.
+- A *Bilinear interpolation* is a one of Interpolation method that infers the value by applying two lines of the x-axis and the y-axis. There are four dots which are two lines are meeting. The values of these four adjacent points are obtained by the weights of each of corresponding areas.
 
 ### Screenshot of filter effect
 -
