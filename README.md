@@ -10,4 +10,10 @@
 - A *Bilinear interpolation* is a one of Interpolation method that infers the value by applying two lines of the x-axis and the y-axis. There are four dots which are two lines are meeting. The values of these four adjacent points are obtained by the weights of each of corresponding areas.
 
 ### Screenshot of filter effect
--
+- Rate is 1.5/ 1.5
+
+- ![img1](./img/img1.jpg)
+
+- Rate is 2.0/ 2.0
+
+- ![img2](./img/img2.jpg)
