@@ -12,8 +12,8 @@
 ### Screenshot of filter effect
 - Rate is 1.5/ 1.5
 
-- ![img1](./img/img1.jpg)
+![img1](./img/img1.jpg)
 
 - Rate is 2.0/ 2.0
 
-- ![img2](./img/img2.jpg)
+![img2](./img/img2.jpg)
