@@ -26,6 +26,8 @@ int main(int argc, char** argv) {
 			int px = (int)(x / w_rate);
 			int py = (int)(y / h_rate);
 
+			if (px >= image.cols - 1 || py >= image.rows - 1) break;
+
 			double fx1 = (double)x / (double)w_rate - (double)px;
 			double fx2 = 1 - fx1;
 			double fy1 = (double)y / (double)h_rate - (double)py;
@@ -35,12 +37,12 @@ int main(int argc, char** argv) {
 			double w2 = fx1*fy2;
 			double w3 = fx2*fy1;
 			double w4 = fx1*fy1;
-			if (px >= image.cols - 1 || py >= image.rows - 1) break;
-				Vec3b p1 = image.at<Vec3b>(py, px);
-				Vec3b p2 = image.at<Vec3b>(py, px + 1);
-				Vec3b p3 = image.at<Vec3b>(py + 1, px);
-				Vec3b p4 = image.at<Vec3b>(py + 1, px + 1);
-				result_img.at<Vec3b>(y, x) = w1*p1 + w2*p2 + w3*p3 + w4*p4;
+
+			Vec3b p1 = image.at<Vec3b>(py, px);
+			Vec3b p2 = image.at<Vec3b>(py, px + 1);
+			Vec3b p3 = image.at<Vec3b>(py + 1, px);
+			Vec3b p4 = image.at<Vec3b>(py + 1, px + 1);
+			result_img.at<Vec3b>(y, x) = w1*p1 + w2*p2 + w3*p3 + w4*p4;
 		}
 	}
 
